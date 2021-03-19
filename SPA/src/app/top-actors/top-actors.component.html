@@ -1,0 +1,13 @@
+<ul class="list-group mt-5">
+  <li class="list-group-item bg-light"><h2>Top actors</h2></li>
+  <li class="list-group-item" *ngFor="let actor of actors; let idx = index">
+    <div class="row">
+      <div class="col-6">
+        <div>{{idx+1}}. {{actor.key}}</div>
+      </div>
+      <div class="col-6">
+        <div style="display: flex; justify-content: flex-end">Average rating: {{makeTwoDecimal(actor.avg_rating.value)}} / 10</div>
+      </div>
+    </div>
+  </li>
+</ul>

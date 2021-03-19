@@ -1,0 +1,25 @@
+<form>
+  <div class="card">
+    <div class="card-header">
+      <h2>Fulltext movie search</h2>
+    </div>
+    <div class="card-body">
+      <div class="input-group mb-3">
+        <input type="text" #searchInput class="form-control" placeholder="Enter a search term" aria-label="Recipient's username"
+          aria-describedby="basic-addon2">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="submit" (click)="Search(searchInput.value)">Search</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+
+<div *ngIf="movies">
+  <div class="row">
+    <div class="col-md-4" *ngFor="let movie of movies">
+      <app-movie-card [movie]="movie"></app-movie-card>
+    </div>
+  </div>
+</div>
