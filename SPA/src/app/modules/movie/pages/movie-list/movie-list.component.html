@@ -1,0 +1,79 @@
+<div class="container">
+
+    <ul ngbNav #nav="ngbNav" [(activeId)]="activeTab" class="nav-tabs mt-5">
+        <li [ngbNavItem]="1">
+            <a ngbNavLink>Simple search</a>
+            <ng-template ngbNavContent>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="input-group">
+                            <input type="text" #searchInput class="form-control" placeholder="Enter a search term"
+                                aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button"
+                                    (click)="SearchMovie(searchInput.value, null, null, null)">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </li>
+
+        <li [ngbNavItem]="2">
+            <a ngbNavLink>Advanced search</a>
+            <ng-template ngbNavContent>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="title">Title</label>
+                                    <input #title type="text" class="form-control" id="title" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="rating">Rating at least</label>
+                                    <input #rating type="text" class="form-control" id="rating">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="genre">Genre</label>
+                                    <select #genre class="form-control" id="genre">
+                                        <option></option>
+                                        <option *ngFor="let genre of genres">{{genre.key}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="country">Country</label>
+                                    <select #country class="form-control" id="country">
+                                        <option></option>
+                                        <option *ngFor="let country of countries">{{country.key}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display:flex; justify-content:flex-end;">
+                            <button type="submit" class="btn btn-outline-secondary"
+                                (click)="SearchMovie(title.value, genre.value, country.value, rating.value)">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </li>
+    </ul>
+
+    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+
+
+    <div *ngIf="movies">
+        <div class="row">
+            <div class="col-md-4" *ngFor="let movie of movies">
+                <app-movie-card [movie]="movie"></app-movie-card>
+            </div>
+        </div>
+    </div>
+</div>

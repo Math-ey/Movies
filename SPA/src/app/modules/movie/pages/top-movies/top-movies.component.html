@@ -1,0 +1,18 @@
+<div class="container">
+    <ul class="list-group mt-5">
+        <li class="list-group-item bg-light">
+            <h2>Top movies</h2>
+        </li>
+        <li class="list-group-item" *ngFor="let movie of movies; let idx = index">
+            <div class="row">
+                <div class="col-6">
+                    <div>{{idx+1}}. {{movie.title}}</div>
+                </div>
+                <div class="col-6">
+                    <div style="display: flex; justify-content: flex-end">Rating: {{movie.rating}} / 10 out of
+                        {{movie.ratingCount}} user reviews</div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

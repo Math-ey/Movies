@@ -1,8 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css?family=Roboto');
-@import '~bootstrap/dist/css/bootstrap.min.css';
 
-* {
-    font-family: 'Roboto', sans-serif;
-  }
-  body { padding-top: 70px; }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Firefox remove outline */
+:focus {
+  outline: none;
+}
+
+::-moz-focus-inner {
+  border: 0;
+}

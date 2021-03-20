@@ -1,0 +1,137 @@
+
+<div class="container" *ngIf="movie">
+    <div class="card">
+      <div class="card-header bg-light">
+        <h2 class="card-title">
+          {{movie.title}}
+        </h2>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-4">
+            <img [src]="movie.posterUrl" class="center" >
+          </div>
+          <div class="col-lg-8">
+            
+            <div class="row pb-2" *ngIf="movie.releaseDate">
+              <div class="col-md-3">
+                <span class="text-muted">Plot:</span>
+              </div>
+              <div class="col-md-9">
+                {{movie.plot}}
+              </div>
+            </div>
+  
+            <div class="row pb-2" *ngIf="movie.releaseDate">
+              <div class="col-md-3">
+                <span class="text-muted">Release Date:</span>
+              </div>
+              <div class="col-md-9">
+                {{movie.releaseDate}}
+              </div>
+            </div>
+  
+           
+  
+            <div class="row pb-2" *ngIf="movie.gross">
+              <div class="col-md-3">
+                <span class="text-muted">Gross:</span>
+              </div>
+              <div class="col-md-3">
+                {{movie.gross}} $
+              </div>
+            </div>
+  
+            <div class="row pb-2" *ngIf="movie.budget">
+              <div class="col-md-3">
+                <span class="text-muted">Budget:</span>
+              </div>
+              <div class="col-md-3">
+                {{movie.budget}} $
+              </div>
+            </div>
+  
+            <div class="row pb-2" *ngIf="movie.rating">
+              <div class="col-md-3">
+                <span class="text-muted">Rating:</span>
+  
+              </div>
+              <div class="col-md-6">
+                {{movie.rating}} of {{movie.ratingCount}} user ratings
+              </div>
+            </div>
+  
+            <div class="row pb-2" *ngIf="movie.genres">
+              <div class="col-md-3">
+                <span class="text-muted">Genres:</span>
+  
+              </div>
+              <div class="col-md-6">
+                <span>{{movie.genres.join(", ")}}</span>
+              </div>
+            </div>
+  
+            <div class="row pb-2" *ngIf="movie.languages">
+              <div class="col-md-3">
+                <span class="text-muted">Languages:</span>
+  
+              </div>
+              <div class="col-md-6">
+                <span>{{movie.languages.join(", ")}}</span>
+              </div>
+            </div>
+  
+            <div class="row pb-2" *ngIf="movie.runTimeInMinutes">
+              <div class="col-md-3">
+                <span class="text-muted">Runtime:</span>
+  
+              </div>
+              <div class="col-md-6">
+                <span>{{movie.runTimeInMinutes}} min</span>
+              </div>
+            </div>
+  
+            <div class="row pb-2" *ngIf="movie.countries">
+              <div class="col-md-3">
+                <span class="text-muted">Countries:</span>
+  
+              </div>
+              <div class="col-md-6">
+                <span>{{movie.countries.join(", ")}}</span>
+              </div>
+            </div>
+  
+            <div class="row pb-2" *ngIf="movie.actors">
+              <div class="col-md-3">
+                <span class="text-muted">Actors:</span>
+  
+              </div>
+              <div class="col-md-6">
+                <span *ngFor="let actor of movie.actors">{{actor.name}}<br></span>
+              </div>
+            </div>
+  
+            <div class="row pb-2" *ngIf="movie.directors">
+              <div class="col-md-3">
+                <span class="text-muted">Directors:</span>
+  
+              </div>
+              <div class="col-md-6">
+                <span *ngFor="let dir of movie.directors">{{dir}}<br></span>
+              </div>
+            </div>
+  
+            <div class="row pb-2" *ngIf="movie.writers">
+              <div class="col-md-3">
+                <span class="text-muted">Writers:</span>
+              </div>
+              <div class="col-md-6">
+                <span *ngFor="let writer of movie.writers">{{writer}}<br></span>
+              </div>
+            </div>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
