@@ -8,11 +8,11 @@ app.get('/api', (req, res) => {
     res.send('Hello World!')
 });
 
-var movies = require('./movies.js');
-var genres = require('./genres.js');
-var countries = require('./countries.js');
-var actors = require('./actors.js');
-var directors = require('./directors.js');
+var movies = require('./Routes/movies');
+var genres = require('./Routes/genres');
+var countries = require('./Routes/countries');
+var actors = require('./Routes/actors');
+var directors = require('./Routes/directors');
 
 app.use('/api/movies', movies);
 app.use('/api/genres', genres);

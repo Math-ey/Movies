@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var client = require("./elastic-client")
-var config = require('./cfg.json');
+var client = require("../elastic-client")
+var config = require('../cfg.json');
 
 router.get('/', (req, res) => {
     let data = client.search({
