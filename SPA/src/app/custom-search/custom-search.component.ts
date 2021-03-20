@@ -23,13 +23,9 @@ export class CustomSearchComponent implements OnInit {
     });
   }
 
-  submitButtonClicked(title, rating, genre, country){
-    console.log(title);
-    console.log(rating);
-    console.log(genre);
-    console.log(country);
-    
-    this.service.getMoviesCustomSearch(title, rating, genre, country).subscribe(res => {
+  submitButtonClicked(title, genre, country, rating){
+
+    this.service.getMovies(title, genre, country, rating).subscribe(res => {
       let hits = res.hits.hits;
       this.movies = hits.map( hit => {
         var movie = <Movie>{

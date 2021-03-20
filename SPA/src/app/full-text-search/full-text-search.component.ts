@@ -18,7 +18,7 @@ export class FullTextSearchComponent implements OnInit {
   }
 
   Search (searchVal: string): void{
-    this.service.getMovies(searchVal).subscribe(res=>{
+    this.service.getMoviesSimple(searchVal).subscribe(res=>{
       let hits = res.hits.hits;
       this.movies = hits.map( hit => {
         var movie = <Movie>{

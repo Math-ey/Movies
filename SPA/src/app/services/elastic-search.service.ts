@@ -11,103 +11,89 @@ export class ElasticSearchService {
 
   constructor(private http: HttpClient) { }
 
-  
-  
-
-  getMovies(title: string): Observable<any> {
-   
-    let param = new HttpParams();
-    param.set("term", title);
-    let url: string = "api/searchByTitle";
-
+  getMoviesSimple(title: string): Observable<any> {
+    let url: string = "api/movies";
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       }),
-      params: new HttpParams().set('searchValue', title)
+      params: new HttpParams()
+        .set('title', title)
     };
-    return this.http.get(url, httpOptions );
-    
+    return this.http.get(url, httpOptions);
+  }
+
+  getMovies(title: string, genre: string, country: string, rating: number): Observable<any> {
+    let url: string = "api/movies";
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+      params: new HttpParams()
+        .set('title', title)
+        .set('genre', genre)
+        .set('country', country)
+        .set('rating', rating.toString())
+    };
+    return this.http.get(url, httpOptions);
   }
 
   getMovie(id: string): Observable<any> {
-    let httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      }),
-      params: new HttpParams().set('id', id)
-    };
-    let url: string = "api/searchById";
-    return this.http.get(url, httpOptions );
-  }
-
-  getTopActors(): Observable<any>{
-    let httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      }),
-    };
-    let url: string = "api/topActors";
-    return this.http.get(url, httpOptions );
-  }
-
-  getTopMovies(): Observable<any>{
-    let httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      }),
-    };
-    let url: string = "api/topMovies";
-    return this.http.get(url, httpOptions );
-  }
-
-  getTopDirectors(): Observable<any>{
-    let httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      }),
-    };
-    let url: string = "api/topDirectors";
-    return this.http.get(url, httpOptions );
-  }
-
-  getGenres(): Observable<any>{
-    let httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      }),
-    };
-    let url: string = "api/genres";
-    return this.http.get(url, httpOptions );
-  }
-  getCountries(): Observable<any>{
-    let httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      }),
-    };
-    let url: string = "api/countries";
-    return this.http.get(url, httpOptions );
-  }
-
-  getMoviesCustomSearch(title, rating, genre, country): Observable<any> {
-   
-    let url: string = "api/customSearch";
-    let data = {
-      title: title,
-      rating: rating,
-      genre: genre,
-      country: country
-    }
-
-    console.log(data.title);
+    let url: string = `api/movies/${id}`;
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
-    return this.http.post(url, data, httpOptions );
-    
+    return this.http.get(url, httpOptions);
   }
 
+  getTopActors(): Observable<any> {
+    let url: string = "api/actors/top";
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+    };
+    return this.http.get(url, httpOptions);
+  }
+
+  getTopMovies(): Observable<any> {
+    let url: string = "api/movies/top";
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+    };
+    return this.http.get(url, httpOptions);
+  }
+
+  getTopDirectors(): Observable<any> {
+    let url: string = "api/directors/top";
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+    };
+    return this.http.get(url, httpOptions);
+  }
+
+  getGenres(): Observable<any> {
+    let url: string = "api/genres";
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+    };
+    return this.http.get(url, httpOptions);
+  }
+  getCountries(): Observable<any> {
+    let url: string = "api/countries";
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+    };
+    return this.http.get(url, httpOptions);
+  }
 }
