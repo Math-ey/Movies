@@ -11,49 +11,27 @@ router.get('/', function (req, res) {
     let country = req.query.country;
     let mustQueries = [];
 
-    if(title){
-        mustQueries.push({
-            match: {
-                title: title
-            }
-        })
+    if (title) {
+        mustQueries.push({ match: { title: title } })
     }
 
-    if(country){
-        mustQueries.push({
-            match: {
-                countries: country
-            }
-        })
+    if (country) {
+        mustQueries.push({ match: { countries: country } })
     }
 
-    if(genre){
-        mustQueries.push({
-            match: {
-                genres: genre
-            }
-        })
+    if (genre) {
+        mustQueries.push({ match: { genres: genre } })
     }
 
-    if(rating){
-        mustQueries.push({
-            range: {
-                rating: {
-                    gte: rating
-                }
-            }
-        })
+    if (rating) {
+        mustQueries.push({ range: { rating: { gte: rating } } })
     }
 
     let data = client.search({
         index: config.indexName,
         body: {
             size: config.maxHits,
-            query: {
-                bool: {
-                    must: mustQueries
-                }
-            }
+            query: { bool: { must: mustQueries } }
         }
     }, (err, data) => {
         return res.send(JSON.stringify(data));
@@ -62,22 +40,36 @@ router.get('/', function (req, res) {
     // res.send('GET route on movies.');
 });
 
+router.get('/top', (req, res) => {
+    let data = client.search({
+        index: config.indexName,
+        body: {
+            sort: [
+                { rating: { order: "desc", mode: "avg" } },
+                { ratingCount: { order: "desc", mode: "avg" } }
+            ],
+            size: config.maxHits,
+            query: { range: { ratingCount: { gte: 100000 } } }
+        }
+    }, (err, data) => {
+        return res.send(JSON.stringify(data));
+    })
+});
+
 router.get('/:id', function (req, res) {
     let id = req.params.id;
     let data = client.search({
         index: config.indexName,
         body: {
             size: config.maxHits,
-            query: {
-                match: {
-                    "_id": id
-                }
-            }
+            query: { match: { "_id": id } }
         }
     }, (err, data) => {
         return res.send(JSON.stringify(data));
     })
 })
+
+
 
 router.post('/', function (req, res) {
     res.send('POST route on movies.');
