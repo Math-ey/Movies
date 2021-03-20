@@ -1,17 +1,20 @@
 const express = require('express')
-const elasticsearch = require('elasticsearch')
 const bodyParser = require('body-parser');
 const app = express()
-const port = 3000
+var config = require('./cfg.json');
 app.use(bodyParser.json());
-var client = new elasticsearch.Client({
-    host: 'localhost:9200',
-    log: 'trace'
-})
+
+var client = require("./elastic-client")
+
 
 app.get('/api', (req, res) => {
     res.send('Hello World!')
 });
+
+var movies = require('./movies.js');
+
+//both index.js and things.js should be in same directory
+app.use('/api/movies', movies);
 
 app.get('/api/searchByTitle', (req, res) => {
     let param = req.query.searchValue;
@@ -262,4 +265,4 @@ app.post('/api/customSearch', (req, res) => {
         })
 });
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(config.apiPort, () => console.log(`Example app listening on port ${config.apiPort}!`))

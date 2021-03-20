@@ -1,0 +1,6 @@
+{
+    "indexName": "action_movies",
+    "maxHits": 100,
+    "elasticsearchServerAddress": "localhost:9200",
+    "apiPort": 3000
+}
