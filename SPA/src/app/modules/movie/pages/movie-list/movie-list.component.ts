@@ -16,10 +16,14 @@ export class MovieListComponent implements OnInit {
   movies: Movie[];
   activeTab: number = 1;
 
+  // Pagination
   page = 1;
   collectionSize = 0;
-  pageSize = 5;
+  pageSize = 9;
+  maxSize = 7;
+
   searchParams = null;
+
 
   constructor(private movieService: MovieService, private genreService: GenreService, private countryService: CountryService) { }
 

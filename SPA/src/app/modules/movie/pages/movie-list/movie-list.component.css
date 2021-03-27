@@ -8,3 +8,9 @@
       margin-right: auto;
       width: 50%;
     }
+
+.pagination {
+  display: block;
+  margin-top: 25px;
+  padding-bottom: 25px;
+}
