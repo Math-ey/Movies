@@ -9,8 +9,8 @@ router.get('/', (req, res) => {
     const rating = req.query.rating;
     const genre = req.query.genre;
     const country = req.query.country;
-    const page = req.query.page;
-    const limit = req.query.limit;
+    const page = req.query.page && req.query.page >= 0 ? req.query.page : 0;
+    const limit = req.query.limit || config.maxHits;
 
     let mustQueries = [];
 
@@ -40,11 +40,11 @@ router.get('/', (req, res) => {
     }, (err, data) => {
         return res.send(JSON.stringify(data));
     })
-
-    // res.send('GET route on movies.');
 });
 
 router.get('/top', (req, res) => {
+    const page = req.query.page && req.query.page >= 0 ? req.query.page : 0;
+    const limit = req.query.limit || 25;
     let data = client.search({
         index: config.indexName,
         body: {
@@ -52,7 +52,8 @@ router.get('/top', (req, res) => {
                 { rating: { order: "desc", mode: "avg" } },
                 { ratingCount: { order: "desc", mode: "avg" } }
             ],
-            size: config.maxHits,
+            size: limit,
+            from: page * limit, 
             query: { range: { ratingCount: { gte: 100000 } } }
         }
     }, (err, data) => {
