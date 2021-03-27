@@ -15,4 +15,8 @@ export class MovieCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public imageErrorHandler(event){
+    event.target.src = 'assets/default-movie.png';
+  }
+
 }

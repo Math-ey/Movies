@@ -1,23 +1,24 @@
 const express = require('express')
-const bodyParser = require('body-parser');
+const config = require('./cfg.json');
 const app = express()
-var config = require('./cfg.json');
-app.use(bodyParser.json());
+app.use(express.json());
 
 app.get('/api', (req, res) => {
     res.send('Hello World!')
 });
 
-var movies = require('./Routes/movies');
-var genres = require('./Routes/genres');
-var countries = require('./Routes/countries');
-var actors = require('./Routes/actors');
-var directors = require('./Routes/directors');
+const moviesRoute = require('./routes/movies');
+const genresRoute = require('./routes/genres');
+const countriesRoute = require('./routes/countries');
+const actorsRoute = require('./routes/actors');
+const directorsRoute = require('./routes/directors');
 
-app.use('/api/movies', movies);
-app.use('/api/genres', genres);
-app.use('/api/countries', countries);
-app.use('/api/actors', actors);
-app.use('/api/directors', directors);
+app.use('/api/movies', moviesRoute);
+app.use('/api/genres', genresRoute);
+app.use('/api/countries', countriesRoute);
+app.use('/api/actors', actorsRoute);
+app.use('/api/directors', directorsRoute);
 
-app.listen(config.apiPort, () => console.log(`Example app listening on port ${config.apiPort}!`))
+const PORT = process.env.PORT || config.apiPort;
+
+app.listen(PORT, () => console.log(`API app listening on port ${PORT}!`))

@@ -5,23 +5,23 @@
         <h5 class="card-title">{{movie.title}}</h5>
       </div>
       <div class="card-body">
-        <img [src]="movie.posterUrl" class="center mb-3">
+        <img [src]="movie.posterUrl" class="center mb-3" (error)="imageErrorHandler($event)">
   
       </div>
       <div class="card-footer">
         <div *ngIf="movie.rating" class="row mt-2">
-          <div class="col-6 text-muted">Rating:</div>
-          <div class="col-6">{{movie.rating}}</div>
+          <div class="col-5 text-muted">Rating:</div>
+          <div class="col-7">{{movie.rating}}</div>
         </div>
   
         <div class="row mt-2" *ngIf="movie.releaseDate">
-          <div class="col-6 text-muted">Release date:</div>
-          <div class="col-6">{{movie.releaseDate}}</div>
+          <div class="col-5 text-muted">Release date:</div>
+          <div class="col-7">{{movie.releaseDate}}</div>
         </div>
   
         <div class="row mt-2" *ngIf="movie.genres">
-          <div class="col-6 text-muted">Genres:</div>
-          <div class="col-6">{{movie.genres.join(", ")}}</div>
+          <div class="col-5 text-muted">Genres:</div>
+          <div class="col-7">{{movie.genres.slice(0, 5).join(", ")}}</div>
         </div>
       </div>
     </a>

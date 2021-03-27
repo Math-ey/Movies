@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { ComponentFactoryResolver, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -10,31 +10,20 @@ export class MovieService {
 
   constructor(private http: HttpClient) { }
 
-  getMovies(title?: string, genre?: string, country?: string, rating?: string): Observable<any> {
+  getMovies(searchParams): Observable<any> {
+    
+    Object.keys(searchParams).forEach(x => {
+      if(searchParams[x] == null){
+        searchParams[x] = "";
+      }
+    })
+
     let url: string = "api/movies";
-    let params: HttpParams = new HttpParams();
-
-    if(title){
-      params = params.append('title', title);
-    }
-
-    if(genre){
-      params = params.append('genre', genre);
-    }
-
-    if(country){
-      params = params.append('country', country);
-    }
-
-    if(rating){
-      params = params.append('rating', rating);
-    }
-
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       }),
-      params: params
+      params: searchParams
     };
     return this.http.get(url, httpOptions);
   }

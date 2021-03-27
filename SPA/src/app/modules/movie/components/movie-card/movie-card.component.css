@@ -1,6 +1,10 @@
 .card {
     margin-top: 50px;
   }
+
+  .card-footer {
+    min-height: 180px;
+  }
   
   .center {
       display: block;

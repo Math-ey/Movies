@@ -42,4 +42,8 @@ export class MovieDetailComponent implements OnInit {
     });
   }
 
+  public imageErrorHandler(event){
+    event.target.src = 'assets/default-movie.png';
+  }
+
 }

@@ -9,7 +9,7 @@
       <div class="card-body">
         <div class="row">
           <div class="col-lg-4">
-            <img [src]="movie.posterUrl" class="center" >
+            <img [src]="movie.posterUrl" class="center" (error)="imageErrorHandler($event)">
           </div>
           <div class="col-lg-8">
             

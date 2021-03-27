@@ -4,11 +4,14 @@ var client = require("../elastic-client")
 var config = require('../cfg.json');
 
 
-router.get('/', function (req, res) {
-    let title = req.query.title;
-    let rating = req.query.rating;
-    let genre = req.query.genre;
-    let country = req.query.country;
+router.get('/', (req, res) => {
+    const title = req.query.title;
+    const rating = req.query.rating;
+    const genre = req.query.genre;
+    const country = req.query.country;
+    const page = req.query.page;
+    const limit = req.query.limit;
+
     let mustQueries = [];
 
     if (title) {
@@ -30,7 +33,8 @@ router.get('/', function (req, res) {
     let data = client.search({
         index: config.indexName,
         body: {
-            size: config.maxHits,
+            size: limit,
+            from: page * limit,
             query: { bool: { must: mustQueries } }
         }
     }, (err, data) => {
@@ -56,7 +60,7 @@ router.get('/top', (req, res) => {
     })
 });
 
-router.get('/:id', function (req, res) {
+router.get('/:id', (req, res) => {
     let id = req.params.id;
     let data = client.search({
         index: config.indexName,
@@ -71,7 +75,7 @@ router.get('/:id', function (req, res) {
 
 
 
-router.post('/', function (req, res) {
+router.post('/', (req, res) => {
     res.send('POST route on movies.');
 });
 
